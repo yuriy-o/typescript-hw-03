@@ -9,13 +9,15 @@ class Key {
 class Person {
   constructor(private key: Key) {}
 
-  getKey() {
+  //TODO додав, що метод повертає значення 'Key'
+  getKey(): Key {
     return this.key;
   }
 }
 
+//TODO замінив 'private' на 'protected'
 abstract class House {
-  private tenants: string[] = [];
+  protected tenants: string[] = [];
   door: boolean;
   key: Key;
 
@@ -33,9 +35,10 @@ abstract class House {
   public abstract openDoor(key: Key): void;
 }
 
+//TODO замінив 'key === this.key' на => 'key.getSignature() === this.key.getSignature()'
 class MyHouse extends House {
   public openDoor(key: Key): void {
-    if (!this.door && key === this.key) {
+    if (!this.door && key.getSignature() === this.key.getSignature()) {
       this.door = true;
     }
   }
